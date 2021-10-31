@@ -5,7 +5,9 @@
 package com.FincaReservas.Reto3Finca.Controladores;
 
 import com.FincaReservas.Reto3Finca.Modelos.Reservaciones;
+import com.FincaReservas.Reto3Finca.Repositorios.ContadorClientes;
 import com.FincaReservas.Reto3Finca.Servicios.ServiciosReservaciones;
+import com.FincaReservas.Reto3Finca.Servicios.StatusReservas;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +60,21 @@ public class ControladorReservaciones {
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
     }
+    
+    
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return servicio.reporteStatusServicio();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservaciones> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return servicio.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return servicio.reporteClientesServicio();
+     }
+
 }
